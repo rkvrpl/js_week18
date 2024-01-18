@@ -3,39 +3,47 @@
 
 function makeOne() {
 	//Ваш код
+	localStorage.setItem('games', '11');
 }
 
 //добавьте слушатель события
+document.querySelector('.b-1').addEventListener('click', makeOne);
 
 //Задание 2
 //Создайте функцию makeTwo, которая сохраняет в Local Storage строку "7,6,5". Ключ задайте самостоятельно. Вызывается функция по кнопке Задание 2.
 
 function makeTwo() {
 	//Ваш код
+	localStorage.setItem('numbers', '7,6,5');
 	console.log('Строка "7,6,5" была записана в Local Storage.');
 }
 
 //добавьте слушатель события
+document.querySelector('.b-2').addEventListener('click', makeTwo);
 
 //Задание 3
 //Создайте функцию makeThree, которая сохраняет в Local Storage строку "name=John, age=25". Ключ задайте самостоятельно. Вызывается функция по кнопке Задание 3.
 
 function makeThree() {
 	//Ваш код
+	localStorage.setItem('info', 'name=John, age=25');
 	console.log('Строка "name=John, age=25" была записана в Local Storage.');
 }
 
 //добавьте слушатель события
+document.querySelector('.b-3').addEventListener('click', makeThree);
 
 //Задание 4
 //Создайте функцию makeFour, которая сохраняет в Local Storage логическое значение true. Ключ задайте самостоятельно. Вызывается функция по кнопке Задание 4.
 
 function makeFour() {
 	//Ваш код
+	localStorage.setItem('boolean', 'true');
 	console.log('Логическое значение true было записано в Local Storage.');
 }
 
 //добавьте слушатель события
+document.querySelector('.b-4').addEventListener('click', makeFour);
 
 //Задание 5
 //Создайте функцию makeFive, которая сохраняет в Local Storage значение null. Ключ задайте самостоятельно. Вызывается функция по кнопке Задание 5.
