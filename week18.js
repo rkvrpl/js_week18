@@ -416,8 +416,12 @@ const updateCartCount = () => {
 	//Ваш код
 	const cartItems = JSON.parse(localStorage.getItem('cartItems'));
 	const resultElement = document.querySelector('.practicum24');
-	console.log(cartItems.length);
-	resultElement.innerHTML += `Количество товаров в корзине ${cartItems.length}`;
+	if (localStorage.getItem('cartItems') === null) {
+		resultElement.innerHTML += `Товары отсуствуют в корзине`;
+	}
+	else{
+		resultElement.innerHTML += `Количество товаров в корзине ${cartItems.length} `;
+	}
 };
 
 document.querySelector('.b-24').addEventListener('click', updateCartCount);
@@ -437,6 +441,7 @@ document.querySelector('.b-25').addEventListener('click', clearCart);
 //При загрузке страницы установите cookie с именем "username" и значением "Кот Учёный". Выведите сообщение в консоль, подтверждающее успешное создание cookie.
 
 //Ваш код
+document.cookie = 'username=Кот Учёный'
 console.log("Cookie 'username' установлен.");
 
 //Задание 27
@@ -450,6 +455,7 @@ const getCookie = (name) => {
 		if (cookie[0] === name) {
 			const value = cookie[1] || '';
 			//Ваш код
+			cookieContainer.innerHTML = value;
 		}
 	}
 	//Ваш код
@@ -465,14 +471,18 @@ document.querySelector('.b-27').addEventListener('click', () => {
 
 const checkCookie = () => {
 	//Ваш код
+	const username = getCookie('username');
 	if (username !== '') {
 		//Ваш код
+		console.log(username);
 	} else {
 		//Ваш код
+		console.log(`Cookie с именем 'username' не найден.`);
 	}
 };
 
 // добавьте слушатель события
+document.querySelector('.b-28').addEventListener('click', checkCookie);
 
 //Задание 29
 //Создайте функцию setCookie, которая принимает имя и значение cookie. Функция должна устанавливать cookie с указанным именем и значением. После установки cookie, выведите сообщение в консоль. Вызывается функция по кнопке Задание 29.
@@ -480,6 +490,7 @@ const checkCookie = () => {
 const setCookie = (name, value) => {
 	document.cookie = `${name}=${value}`;
 	//Ваш код
+	console.log(`Установлена кука ${name}=${value}`);
 };
 
 document.querySelector('.b-29').addEventListener('click', () => {
@@ -492,6 +503,7 @@ document.querySelector('.b-29').addEventListener('click', () => {
 const deleteCookie = (name) => {
 	document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 	//Ваш код
+	console.log(`Кука ${name} удалена`);
 };
 
 document.querySelector('.b-30').addEventListener('click', () => {
