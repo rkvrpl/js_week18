@@ -194,7 +194,7 @@ function showEleven() {
 	for (let i = 0; i < arrayEleven.length; i++) {
 		const object = arrayEleven[i];
 		for (let key in object) {
-			output += `${key} ${object[key]}`;
+			output += `${key} ${object[key]} `;
 		}
 	}
 	document.querySelector('.practicum12').textContent = output;
@@ -215,7 +215,7 @@ const showTen = () => {
 		const resultElement = document.querySelector('.practicum13');
 		for (const key in arrayTen) {
 			const value = arrayTen[key];
-			resultElement.innerHTML += `${key}: ${value}<br>`;
+			resultElement.innerHTML += `${key} ${value}<br>`;
 		}
 	} else {
 		console.log('Массив arrayTen не найден в Local Storage.');
@@ -231,9 +231,15 @@ document.querySelector('.b-13').addEventListener('click', showTen);
 //Подсказка: Для преобразования строки в объект используйте метод JSON.parse(). Для работы с массивом используйте циклы.
 
 const showNine = () => {
-	const arrayNineString = LocalStorage.getItem('arrayNine');
+	const arrayNineString = localStorage.getItem('arrayNine');
 	if (arrayNineString) {
 		//Ваш код
+		const arrayNine = JSON.parse(arrayNineString);
+		const resultElement = document.querySelector('.practicum14');
+		for (const key in arrayNine) {
+			const value = arrayNine[key];
+			resultElement.innerHTML += `${key} ${value}<br>`;
+		}
 	} else {
 		console.log('Массив arrayNine не найден в Local Storage.');
 	}
@@ -246,6 +252,18 @@ document.querySelector('.b-14').addEventListener('click', showNine);
 
 const showEight = () => {
 	//Ваш код
+	const objectEightString = localStorage.getItem('objectEight');
+	if (objectEightString) {
+		//Ваш код
+		const objectEight = JSON.parse(objectEightString);
+		const resultElement = document.querySelector('.practicum15');
+		for (const key in objectEight) {
+			const value = objectEight[key];
+			resultElement.innerHTML += `${value}; `;
+		}
+	} else {
+		console.log('Массив objectEight не найден в Local Storage.');
+	}
 };
 
 document.querySelector('.b-15').addEventListener('click', showEight);
@@ -255,6 +273,15 @@ document.querySelector('.b-15').addEventListener('click', showEight);
 
 const showSeven = () => {
 	//Ваш код
+	const objectSevenString = localStorage.getItem('objectSeven');
+	if (objectSevenString) {
+		//Ваш код
+		const objectSeven = JSON.parse(objectSevenString);
+		const resultElement = document.querySelector('.practicum16');
+		resultElement.innerHTML += `В ${objectSeven.city} живёт ${objectSeven.population} человек`;
+	} else {
+		console.log('Массив objectSeven не найден в Local Storage.');
+	}
 };
 
 document.querySelector('.b-16').addEventListener('click', showSeven);
@@ -264,6 +291,15 @@ document.querySelector('.b-16').addEventListener('click', showSeven);
 
 const showSix = () => {
 	//Ваш код
+	const objectSixString = localStorage.getItem('objectSix');
+	if (objectSixString) {
+		//Ваш код
+		const objectSix = JSON.parse(objectSixString);
+		const resultElement = document.querySelector('.practicum17');
+		resultElement.innerHTML += `Привет! Я ${objectSix.name}. Мне ${objectSix.age} лет.`;
+	} else {
+		console.log('Массив objectSix не найден в Local Storage.');
+	}
 };
 
 document.querySelector('.b-17').addEventListener('click', showSix);
@@ -273,11 +309,12 @@ document.querySelector('.b-17').addEventListener('click', showSix);
 
 const clearLocalStorage = () => {
 	//Ваш код
+	localStorage.clear()
 	console.log('Local Storage очищен.');
 };
 
 //добавьте слушатель события
-
+document.querySelector('.b-18').addEventListener('click', clearLocalStorage);
 //Задание 19
 //Cоздана форма с одним поле ввода, в которое пользователь может вводить только числа. Создайте массив numbers. Когда пользователь нажимает кнопке Задание 19 число должно добавляться в массив. Массив должен сохраняться в Local Storage с ключем task19. Вызывается функция по кнопке Задание 19. Что произойдёт, если нажать на кнопке трижды?
 
@@ -286,8 +323,13 @@ let numbers = [];
 const addToNumbers = () => {
 	const numberInput = document.getElementById('numberInput');
 	const number = parseInt(numberInput.value);
-
 	//Ваш код
+	if(number !== NaN){
+		numbers.push(number);
+		localStorage.setItem('task19', JSON.stringify(numbers));
+		numberInput.value = "";
+		console.log(numbers);
+	}
 };
 
 document.querySelector('.b-19').addEventListener('click', addToNumbers);
@@ -298,6 +340,8 @@ document.querySelector('.b-19').addEventListener('click', addToNumbers);
 const removeLastElement = () => {
 	if (numbers.length > 0) {
 		//Ваш код
+		numbers.pop();
+		localStorage.setItem('task19', JSON.stringify(numbers));
 		console.log('Последний элемент удален из массива numbers и сохранен в Local Storage.');
 	} else {
 		console.log('Массив numbers пуст.');
@@ -305,21 +349,24 @@ const removeLastElement = () => {
 };
 
 //добавьте слушатель события
+document.querySelector('.b-20').addEventListener('click', removeLastElement);
 
 //Задание 21
-//Создайте функцию addToCart, которая при нажатии кнопки Задание 21 получает из Local Storage сохранённый массив cartItems. Затем добавляет новый элемент в массив, представляющий товар, введённый вами в поле ввода. Массив cartItems должен сохраняться в Local Storage с ключом task21. Вызывается функция по кнопке Задание 21.
-//Подсказка: необходимо проверить существует ли значение и не является пустым. Если значение в хранилище есть, то оно преобразуется из JSON в массив. В противном случае, устанавливается пустой массив.
+//Создайте функцию addToCart, которая активируется при нажатии на кнопку "Задание 21". Эта функция должна извлекать из LocalStorage массив cartItems, сохранённый под ключом cartItems, и добавлять в него новый элемент, представляющий товар, введённый вами в поле ввода. После добавления, обновлённый массив должен быть сохранён обратно в LocalStorage под тем же ключом. Функция addToCart вызывается по нажатию на кнопку "Задание 21".
+
+//Подсказка: важно проверить, существует ли значение cartItems в LocalStorage и не является ли оно пустым массивом. Если значение в хранилище есть, то оно преобразуется из JSON в массив. В противном случае, устанавливается пустой массив.
 
 const addToCart = () => {
 	const productInput = document.getElementById('productInput');
 	const product = productInput.value;
 
 	if (product.trim() !== '') {
-		let cartItems = LocalStorage.getItem('cartItems');
+		let cartItems = localStorage.getItem('cartItems');
 		cartItems = cartItems ? JSON.parse(cartItems) : []; //код из подсказки
-
 		//Ваш код
-
+		cartItems.push(product);
+		localStorage.setItem('cartItems', JSON.stringify(cartItems));
+		productInput.value = '';
 		console.log(`Товар "${product}" добавлен в корзину и сохранен в Local Storage.`);
 	} else {
 		console.log('Введите название товара.');
@@ -329,11 +376,20 @@ const addToCart = () => {
 document.querySelector('.b-21').addEventListener('click', addToCart);
 
 //Задание 22
-//Создайте функцию removeFromCart, которая при нажатии кнопки Задание 22 получает из Local Storage сохранённый массив cartItems. Затем удаляет последний элемент из массива. Массив cartItems должен сохраняться в Local Storage с ключом cartItems. Вызывается функция по кнопке Задание 22.
-//Подсказка: необходимо проверить, существует ли значение и не является ли оно пустым. Это может вызвать ошибку, если cartItems не существует в Local Storage или является пустым.
+//Создайте функцию removeFromCart, которая активируется при нажатии на кнопку "Задание 22". Эта функция должна извлекать из LocalStorage массив cartItems, сохранённый под тем же ключом cartItems, и удалять из него последний элемент. После удаления, обновлённый массив должен быть сохранён обратно в LocalStorage. Функция removeFromCart вызывается по нажатию на кнопку "Задание 22".
+
+//Подсказка: перед тестированием функции removeFromCart убедитесь, что в массиве cartItems есть элементы, добавленные с помощью функции addToCart из задания 21. Это позволит вам протестировать удаление элементов из массива и убедиться, что обе функции работают корректно вместе.
 
 const removeFromCart = () => {
 	//Ваш код
+	const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+	if (cartItems.length > 0) {
+		cartItems.pop();
+		localStorage.setItem('cartItems', JSON.stringify(cartItems));
+		console.log('Последний элемент удален из массива cartItems и сохранен в Local Storage.');
+	} else {
+		console.log('Массив cartItems пуст.');
+	}
 };
 
 document.querySelector('.b-22').addEventListener('click', removeFromCart);
@@ -343,6 +399,12 @@ document.querySelector('.b-22').addEventListener('click', removeFromCart);
 
 const showCart = () => {
 	//Ваш код
+	const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+	const resultElement = document.querySelector('.practicum23');
+	for (const key in cartItems) {
+		const value = cartItems[key];
+		resultElement.innerHTML += `${value} `;
+	}
 };
 
 document.querySelector('.b-23').addEventListener('click', showCart);
