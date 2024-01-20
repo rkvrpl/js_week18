@@ -309,7 +309,7 @@ document.querySelector('.b-17').addEventListener('click', showSix);
 
 const clearLocalStorage = () => {
 	//Ваш код
-	localStorage.clear()
+	localStorage.clear();
 	console.log('Local Storage очищен.');
 };
 
@@ -414,6 +414,10 @@ document.querySelector('.b-23').addEventListener('click', showCart);
 
 const updateCartCount = () => {
 	//Ваш код
+	const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+	const resultElement = document.querySelector('.practicum24');
+	console.log(cartItems.length);
+	resultElement.innerHTML += `Количество товаров в корзине ${cartItems.length}`;
 };
 
 document.querySelector('.b-24').addEventListener('click', updateCartCount);
@@ -423,6 +427,7 @@ document.querySelector('.b-24').addEventListener('click', updateCartCount);
 
 const clearCart = () => {
 	//Ваш код
+	localStorage.removeItem('cartItems');
 	console.log('Корзина очищена.');
 };
 
